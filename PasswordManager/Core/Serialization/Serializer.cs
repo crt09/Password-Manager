@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace PasswordManager.Windows.Core.Serialization {
-	public class Serializer<TObj> where TObj : struct {
+	public class Serializer<TObj> where TObj : new() {
 
 		private BinaryFormatter formatter;
 	

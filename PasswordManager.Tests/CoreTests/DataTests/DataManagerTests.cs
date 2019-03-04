@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PasswordManager.Windows.Core.Data;
-using PasswordManager.Windows.Core.Serialization;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Tests.Core.DataTests {
@@ -18,7 +17,7 @@ namespace PasswordManager.Tests.Core.DataTests {
 
 		[TestMethod]
 		public void SaveLoad_Add5Records_GetRecordsCountReturn5() {
-			var database = manager.CreateDatabase();
+			var database = new LoginDatabase();
 			var record = new LoginDatabaseRecord();
 
 			database.Records.Add(record);
@@ -38,7 +37,7 @@ namespace PasswordManager.Tests.Core.DataTests {
 
 		[TestMethod]
 		public void SaveLoad_Add2Records_2ndRecordNameMustBeNotEmpty() {
-			var database = manager.CreateDatabase();
+			var database = new LoginDatabase();
 			var record = new LoginDatabaseRecord();
 
 			database.Records.Add(record);

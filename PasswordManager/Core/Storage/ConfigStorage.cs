@@ -2,7 +2,7 @@
 
 namespace PasswordManager.Windows.Core.Storage {
 	[Serializable]
-	public struct ConfigStorage {
+	public class ConfigStorage {
 		public string AppPin { get; set; }
 	}
 }

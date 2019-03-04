@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using PasswordManager.Windows.Core.Serialization;
+﻿using PasswordManager.Windows.Core.Serialization;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Windows.Core.Data {
@@ -19,12 +18,6 @@ namespace PasswordManager.Windows.Core.Data {
 
 		public LoginDatabase Load() {
 			var database = formatter.Deserialize(path);
-			return database;
-		}
-
-		public LoginDatabase CreateDatabase() {
-			var database = new LoginDatabase();
-			database.Records = new List<LoginDatabaseRecord>();
 			return database;
 		}
 	}

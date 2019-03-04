@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PasswordManager.Windows.Core.Serialization;
 
-namespace PasswordManager.Tests.CoreTests {
+namespace PasswordManager.Tests.CoreTests.SerializationTests {
 	[TestClass]
 	public class SerializerTests {
 

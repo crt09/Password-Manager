@@ -3,13 +3,17 @@ using PasswordManager.Windows.Core.Serialization;
 using PasswordManager.Windows.Core.Storage;
 
 namespace PasswordManager.Windows.Core.Configuration {
-	public static class ConfigurationManager {
-		private static Serializer<ConfigStorage> formatter;
-		static ConfigurationManager() {
+	public class ConfigurationManager : IManager<ConfigStorage> {
+
+		private Serializer<ConfigStorage> formatter;
+		private string path;
+
+		public ConfigurationManager(string path) {
 			formatter = new Serializer<ConfigStorage>();
+			this.path = path;
 		}
 
-		public static bool IsMissing(string path) {
+		public bool IsConfigMissing() {
 			if (!File.Exists(path)) return true;
 			try {
 				formatter.Deserialize(path);
@@ -19,12 +23,12 @@ namespace PasswordManager.Windows.Core.Configuration {
 			return false;
 		}
 
-		public static void Save(ConfigStorage storage, string to) {
-			formatter.Serialize(storage, to);
+		public void Save(ConfigStorage storage) {
+			formatter.Serialize(storage, path);
 		}
 
-		public static ConfigStorage Load(string from) {
-			var storage = formatter.Deserialize(from);
+		public ConfigStorage Load() {
+			var storage = formatter.Deserialize(path);
 			return storage;
 		}
 	}

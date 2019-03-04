@@ -1,25 +1,31 @@
 ﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PasswordManager.Windows.Core.Configuration;
 using PasswordManager.Windows.Core.Storage;
 
-namespace PasswordManager.Windows.Core.Configuration {
+namespace PasswordManager.Tests.CoreTests.ConfigurationTests {
 	[TestClass]
 	public class ConfigurationManagerTests {
 
 		private string path = "test_config.dat";
+		private ConfigurationManager manager;
+
+		public ConfigurationManagerTests() {
+			manager = new ConfigurationManager(path);
+		}
 
 		[TestMethod]
 		public void IsMissing_MissingFile_returnTrue() {
 			if(File.Exists(path))
 				File.Delete(path);
-			bool missing = ConfigurationManager.IsMissing(path);
+			bool missing = manager.IsConfigMissing();
 			Assert.AreEqual(true, missing);
 		}
 
 		[TestMethod]
 		public void IsMissing_HasFile_returnFalse() {
-			ConfigurationManager.Save(new ConfigStorage(), path);
-			bool missing = ConfigurationManager.IsMissing(path);
+			manager.Save(new ConfigStorage());
+			bool missing = manager.IsConfigMissing();
 			Assert.AreEqual(false, missing);
 			File.Delete(path);
 		}
@@ -28,7 +34,7 @@ namespace PasswordManager.Windows.Core.Configuration {
 		public void IsMissing_HasWrongFile_returnTrue() {
 			var stream = File.Create(path);
 			stream.Close();
-			bool missing = ConfigurationManager.IsMissing(path);
+			bool missing = manager.IsConfigMissing();
 			Assert.AreEqual(true, missing);
 			File.Delete(path);
 		}
@@ -39,8 +45,8 @@ namespace PasswordManager.Windows.Core.Configuration {
 			storage.AppPin = "4563";
 			var deStorage = new ConfigStorage();
 
-			ConfigurationManager.Save(storage, path);
-			deStorage = ConfigurationManager.Load(path);
+			manager.Save(storage);
+			deStorage = manager.Load();
 
 			Assert.AreEqual(storage.AppPin, deStorage.AppPin);
 

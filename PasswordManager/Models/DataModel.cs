@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using PasswordManager.Windows.Core.Data;
 using PasswordManager.Windows.Core.Storage.Database;
-using Prism.Mvvm;
 
-namespace PasswordManager.Windows.Models {
-	public class DataModel : BindableBase {
+namespace PasswordManager.Models {
+	public class DataModel {
 
 		public ReadOnlyCollection<LoginDatabaseRecord> Records => 
 			new ReadOnlyCollection<LoginDatabaseRecord>(dataManager.Load().Records);

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using PasswordManager.Models;
 using PasswordManager.Windows.Core.Storage.Database;
-using PasswordManager.Windows.Models;
 
 namespace PasswordManager.Windows.Views {
 	public partial class MainView : UserControl {

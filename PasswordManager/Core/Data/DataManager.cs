@@ -1,4 +1,5 @@
-﻿using PasswordManager.Windows.Core.Serialization;
+﻿using System.Linq;
+using PasswordManager.Windows.Core.Serialization;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Windows.Core.Data {
@@ -13,12 +14,32 @@ namespace PasswordManager.Windows.Core.Data {
 		}		
 
 		public void Save(LoginDatabase database) {
+			for (int i = 0; i < database.Records.Count; i++) {
+				database.Records[i].Key = (uint)i;
+			}
 			formatter.Serialize(database, path);
 		}
 
 		public LoginDatabase Load() {
-			var database = formatter.Deserialize(path);
+			LoginDatabase database = formatter.Deserialize(path);
 			return database;
+		}
+
+		public void DeleteByKey(uint key) {
+			LoginDatabase database = Load();
+			database.Records.RemoveAll(rec => rec.Key == key);
+			Save(database);
+		}
+
+		public void EditByKey(uint key, LoginDatabaseRecord record) {
+			LoginDatabase database = Load();
+			for (int i = 0; i < database.Records.Count; i++) {
+				if (database.Records[i].Key == key) {
+					database.Records[i] = record;
+					break;
+				}
+			}			
+			Save(database);
 		}
 	}
 }

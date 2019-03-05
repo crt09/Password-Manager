@@ -14,13 +14,7 @@ namespace PasswordManager.Windows.Core.Configuration {
 		}
 
 		public bool IsConfigMissing() {
-			if (!File.Exists(path)) return true;
-			try {
-				formatter.Deserialize(path);
-			} catch {
-				return true;
-			}
-			return false;
+			return formatter.DataMissing(path);
 		}
 
 		public void Save(ConfigStorage storage) {

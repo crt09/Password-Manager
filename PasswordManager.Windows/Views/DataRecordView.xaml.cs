@@ -21,21 +21,21 @@ namespace PasswordManager.Windows.Views {
 
 		private void ShowPasswordCheckbox_Checked(object sender, RoutedEventArgs e) {
 			PasswordTextBox.Visibility = Visibility.Visible;
-			Password.Visibility = Visibility.Collapsed;
-			PasswordTextBox.Text = Password.Password;
+			ServicePassword.Visibility = Visibility.Collapsed;
+			PasswordTextBox.Text = ServicePassword.Password;
 		}
 
 		private void ShowPasswordCheckbox_OnUnchecked(object sender, RoutedEventArgs e) {
 			PasswordTextBox.Visibility = Visibility.Collapsed;
-			Password.Visibility = Visibility.Visible;
+			ServicePassword.Visibility = Visibility.Visible;
 		}
 
 		private void Login_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
-			Clipboard.SetText(Login.Text);
+			Clipboard.SetText(ServiceLogin.Text);
 		}
 
 		private void Password_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
-			Clipboard.SetText(Password.Password);
+			Clipboard.SetText(ServicePassword.Password);
 		}
 
 		private void Password_OnPreviewTextInput(object sender, TextCompositionEventArgs e) {
@@ -52,9 +52,9 @@ namespace PasswordManager.Windows.Views {
 			var dataWindow = new DataRecordWindow();
 			dataWindow.Title = "Edit service";
 			dataWindow.ActionButton.Content = "Save";
-			dataWindow.NameBox.Text = this.Name.Content.ToString();
-			dataWindow.LoginBox.Text = this.Login.Text;
-			dataWindow.PasswordBox.Password = this.Password.Password;
+			dataWindow.NameBox.Text = this.ServiceName.Content.ToString();
+			dataWindow.LoginBox.Text = this.ServiceLogin.Text;
+			dataWindow.PasswordBox.Password = this.ServicePassword.Password;
 			dataWindow.ShowDialog();
 			if(dataWindow.Cancelled) return;
 

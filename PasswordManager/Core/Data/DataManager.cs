@@ -5,22 +5,31 @@ namespace PasswordManager.Windows.Core.Data {
 	public class DataManager : IManager<LoginDatabase> {
 
 		private Serializer<LoginDatabase> formatter;
-		private string path;
+		private readonly string path;
+		private readonly string encryptionKey;
 
 		public DataManager(string path) {
 			formatter = new Serializer<LoginDatabase>();
 			this.path = path;
+			this.encryptionKey = "ASDPs=lS$Tsslkgj==";
 		}		
 
 		public void Save(LoginDatabase database) {
-			for (int i = 0; i < database.Records.Count; i++) {
-				database.Records[i].Key = (uint)i;
+			var bufferDatabase = database.Clone();
+			for (int i = 0; i < bufferDatabase.Records.Count; i++) {
+				bufferDatabase.Records[i].Key = (uint)i;
+				bufferDatabase.Records[i].Login = Encryption.Encrypt(bufferDatabase.Records[i].Login, encryptionKey);
+				bufferDatabase.Records[i].Password = Encryption.Encrypt(bufferDatabase.Records[i].Password, encryptionKey);
 			}
-			formatter.Serialize(database, path);
+			formatter.Serialize(bufferDatabase, path);
 		}
 
 		public LoginDatabase Load() {
 			LoginDatabase database = formatter.Deserialize(path);
+			foreach (var record in database.Records) {
+				record.Login = Encryption.Decrypt(record.Login, encryptionKey);
+				record.Password = Encryption.Decrypt(record.Password, encryptionKey);
+			}
 			return database;
 		}
 	}

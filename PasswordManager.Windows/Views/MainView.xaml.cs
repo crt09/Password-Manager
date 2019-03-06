@@ -18,9 +18,9 @@ namespace PasswordManager.Windows.Views {
 			for (int i = 0; i < dataModel.Records.Count; i++) {
 				var dataView = new DataRecordView((uint)i);				
 				dataView.Key = dataModel.Records[i].Key;
-				dataView.Name.Content = dataModel.Records[i].Name;
-				dataView.Login.Text = dataModel.Records[i].Login;
-				dataView.Password.Password = dataModel.Records[i].Password;
+				dataView.ServiceName.Content = dataModel.Records[i].Name;
+				dataView.ServiceLogin.Text = dataModel.Records[i].Login;
+				dataView.ServicePassword.Password = dataModel.Records[i].Password;
 				dataView.Delete += DataViewOnDelete;
 				dataView.Edit += DataViewOnEdit;
 				DataPanel.Children.Add(dataView);

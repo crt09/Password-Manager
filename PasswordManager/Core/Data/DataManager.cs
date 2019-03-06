@@ -11,7 +11,7 @@ namespace PasswordManager.Windows.Core.Data {
 		public DataManager(string path) {
 			formatter = new Serializer<LoginDatabase>();
 			this.path = path;
-			this.encryptionKey = "ASDPs=lS$Tsslkgj==";
+			this.encryptionKey = "slpgnTnJ";
 		}		
 
 		public void Save(LoginDatabase database) {

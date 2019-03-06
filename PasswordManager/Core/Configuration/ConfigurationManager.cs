@@ -11,7 +11,7 @@ namespace PasswordManager.Windows.Core.Configuration {
 		public ConfigurationManager(string path) {
 			formatter = new Serializer<ConfigStorage>();
 			this.path = path;
-			this.encryptionKey = "SoMBnsrgoJSfogjfkfk=";
+			this.encryptionKey = "jYshfjkc";
 		}
 
 		public bool IsConfigMissing() {

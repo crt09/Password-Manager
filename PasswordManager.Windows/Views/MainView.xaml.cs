@@ -5,18 +5,21 @@ using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Windows.Views {
 	public partial class MainView : UserControl {
+
 		private DataModel dataModel;
+		private ConfigurationModel configModel;
 
 		public MainView() {
 			InitializeComponent();
 			dataModel = new DataModel();
+			configModel = new ConfigurationModel();
 			this.UpdateDataPanel();
 		}
 
 		private void UpdateDataPanel() {
 			DataPanel.Children.Clear();
 			for (int i = 0; i < dataModel.Records.Count; i++) {
-				var dataView = new DataRecordView((uint)i);				
+				var dataView = new DataRecordView((uint) i);
 				dataView.Key = dataModel.Records[i].Key;
 				dataView.ServiceName.Content = dataModel.Records[i].Name;
 				dataView.ServiceLogin.Text = dataModel.Records[i].Login;
@@ -48,8 +51,20 @@ namespace PasswordManager.Windows.Views {
 			record.Name = dataWindow.ServiceName;
 			record.Login = dataWindow.ServiceLogin;
 			record.Password = dataWindow.ServicePassword;
-			dataModel.AddValue(record);		
+			dataModel.AddValue(record);
 			this.UpdateDataPanel();
+		}
+
+		private void ChangePasswordButton_Click(object sender, RoutedEventArgs e) {
+			if (configModel.Login(OldAppPassword.Password)
+				&& NewAppPassword.Password == NewAppPasswordRepeat.Password
+				&& NewAppPassword.Password != string.Empty) {
+
+				configModel.Register(NewAppPassword.Password);
+				OldAppPassword.Password = string.Empty;
+				NewAppPassword.Password = string.Empty;
+				NewAppPasswordRepeat.Password = string.Empty;
+			}
 		}
 	}
 }

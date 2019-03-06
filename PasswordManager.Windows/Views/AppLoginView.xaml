@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="PasswordManager.Windows.Views.AppLoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Windows.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600" Background="White">
+    <Grid>
+		<Label x:Name="InfoLabel" Content="information" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+		<PasswordBox x:Name="Password" HorizontalAlignment="Center" Height="24" Margin="0,0,0,50" VerticalAlignment="Center" Width="226" VerticalContentAlignment="Center"/>
+		<PasswordBox x:Name="RepeatPassword" HorizontalAlignment="Center" Height="24" Margin="0,50,0,0" VerticalAlignment="Center" Width="226" Visibility="Collapsed" VerticalContentAlignment="Center"/>
+		<Label Content="Password:" HorizontalAlignment="Center" Margin="0,0,300,50" VerticalAlignment="Center"/>
+		<Label Content="Repeat password:" HorizontalAlignment="Right" Margin="0,50,420,0" VerticalAlignment="Center" Visibility="{Binding Visibility, ElementName=RepeatPassword}"/>
+		<Button x:Name="ActionButton" Content="do-action" HorizontalAlignment="Center" Margin="0,0,0,150" VerticalAlignment="Bottom" Width="76" Height="30" Click="ActionButton_OnClick"/>
+
+	</Grid>
+</UserControl>

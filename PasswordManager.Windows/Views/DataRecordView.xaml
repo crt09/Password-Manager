@@ -17,7 +17,7 @@
 
 				<Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 				<Grid>
-					<PasswordBox x:Name="ServicePassword" HorizontalAlignment="Left" Height="26" Password="user-password" VerticalAlignment="Top" VerticalContentAlignment="Center" PreviewMouseDown="Password_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand" PreviewTextInput="Password_OnPreviewTextInput" CaretBrush="Transparent"/>
+					<PasswordBox x:Name="ServicePassword" HorizontalAlignment="Left" Height="26" Password="user-password" VerticalAlignment="Top" VerticalContentAlignment="Center" PreviewMouseDown="Password_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand" PreviewTextInput="Password_OnPreviewTextInput" CaretBrush="Transparent" PreviewMouseWheel="ServicePassword_OnPreviewMouseWheel"/>
 					<TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="26" Width="{Binding ActualWidth, ElementName=Password}" Text="{Binding Password, ElementName=Password}" VerticalAlignment="Top" VerticalContentAlignment="Center" PreviewMouseDown="Password_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand" PreviewTextInput="Password_OnPreviewTextInput" CaretBrush="Transparent" Visibility="Collapsed"/>
 				</Grid>
 				<CheckBox x:Name="ShowPasswordCheckbox" Content="Show" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" Margin="10,0,0,0" Checked="ShowPasswordCheckbox_Checked" IsChecked="False" Unchecked="ShowPasswordCheckbox_OnUnchecked"/>

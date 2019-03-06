@@ -11,7 +11,8 @@ namespace PasswordManager.Tests.Core.DataTests {
 		private string path = "database_test.dat";
 		private DataManager manager;
 
-		public DataManagerTests() {
+		[TestInitialize]
+		public void Initialize() {
 			manager = new DataManager(path);
 		}
 

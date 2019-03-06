@@ -42,13 +42,13 @@ namespace PasswordManager.Tests.CoreTests.ConfigurationTests {
 		[TestMethod]
 		public void SaveLoad_SaveAndLoadConfig_ConfigsAreEqual() {
 			var storage = new ConfigStorage();
-			storage.AppPin = "4563";
+			storage.AppPassword = "4563";
 			var deStorage = new ConfigStorage();
 
 			manager.Save(storage);
 			deStorage = manager.Load();
 
-			Assert.AreEqual(storage.AppPin, deStorage.AppPin);
+			Assert.AreEqual(storage.AppPassword, deStorage.AppPassword);
 
 			File.Delete(path);
 		}

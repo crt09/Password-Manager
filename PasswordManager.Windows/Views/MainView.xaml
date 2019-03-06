@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="PasswordManager.Windows.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Windows.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="500" Background="White">
+	<Grid>
+		<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0">
+			<TabItem Header="Storage">
+				<Grid Background="White" VerticalAlignment="Stretch" Margin="-2,-1,-2,50">
+					<ScrollViewer>
+						<StackPanel x:Name="DataPanel" Orientation="Vertical"/>
+					</ScrollViewer>
+					<Button x:Name="AddButton" Content="+" HorizontalAlignment="Right" Margin="0,0,10,-40" VerticalAlignment="Bottom" Width="30" Height="30" Command="{Binding AddRecordCommand}" Click="AddButton_Click"/>
+					<Separator VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Settings">
+				<Grid Background="White" Margin="-2,-1,-2,0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="313*"/>
+						<RowDefinition Height="462*"/>
+					</Grid.RowDefinitions>
+					<Label Content="Change application password" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+					<Label Content="Old password:" HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top"/>
+					<PasswordBox x:Name="OldAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,50,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<Label Content="New password:" HorizontalAlignment="Left" Margin="15,80,0,0" VerticalAlignment="Top"/>
+					<PasswordBox x:Name="NewAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,80,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<Label Content="Repeat password:" HorizontalAlignment="Left" Margin="15,110,0,0" VerticalAlignment="Top"/>
+					<PasswordBox x:Name="NewAppPasswordRepeat" HorizontalAlignment="Stretch" Height="26" Margin="123,111,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<Button x:Name="ChangePasswordButton" Content="Change" HorizontalAlignment="Right" Margin="0,142,10,0" VerticalAlignment="Top" Width="75" Height="30" Click="ChangePasswordButton_Click"/>
+					<Separator HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,182,0,0"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<Separator VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,23,0,0"/>
+	</Grid>
+</UserControl>

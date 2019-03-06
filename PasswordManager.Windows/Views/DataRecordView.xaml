@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="PasswordManager.Windows.Views.DataRecordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PasswordManager.Windows.Views"
+             mc:Ignorable="d" d:DesignWidth="500" Background="White" HorizontalAlignment="Stretch" Height="100">
+	<Grid>
+		<Label x:Name="ServiceName" Content="service-name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+		<Button x:Name="DeleteButton" Content="X" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="30" Height="30" Background="Transparent" BorderThickness="0" Click="DeleteButton_Click"/>
+		<Button x:Name="EditButton" Content="–" HorizontalAlignment="Right" Margin="0,10,40,0" VerticalAlignment="Top" Width="30" Height="30" Background="Transparent" BorderThickness="0" Click="EditButton_Click"/>
+
+		<StackPanel Orientation="Vertical" Margin="0,60,0,0" VerticalAlignment="Stretch">
+			<StackPanel Orientation="Horizontal" Margin="0,0,0,0" Height="40">
+				<Label Content="Login:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+				<TextBox x:Name="ServiceLogin" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="user-login" VerticalAlignment="Top" IsReadOnly="True" VerticalContentAlignment="Center" PreviewMouseDown="Login_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand"/>
+
+				<Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				<Grid>
+					<PasswordBox x:Name="ServicePassword" HorizontalAlignment="Left" Height="26" Password="user-password" VerticalAlignment="Top" VerticalContentAlignment="Center" PreviewMouseDown="Password_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand" PreviewTextInput="Password_OnPreviewTextInput" CaretBrush="Transparent" PreviewMouseWheel="ServicePassword_OnPreviewMouseWheel"/>
+					<TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="26" Width="{Binding ActualWidth, ElementName=Password}" Text="{Binding Password, ElementName=Password}" VerticalAlignment="Top" VerticalContentAlignment="Center" PreviewMouseDown="Password_OnPreviewMouseDown" SelectionBrush="Transparent" Cursor="Hand" PreviewTextInput="Password_OnPreviewTextInput" CaretBrush="Transparent" Visibility="Collapsed"/>
+				</Grid>
+				<CheckBox x:Name="ShowPasswordCheckbox" Content="Show" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" Margin="10,0,0,0" Checked="ShowPasswordCheckbox_Checked" IsChecked="False" Unchecked="ShowPasswordCheckbox_OnUnchecked"/>
+			</StackPanel>
+		</StackPanel>
+		<Separator x:Name="Separator" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0"/>
+	</Grid>
+</UserControl>

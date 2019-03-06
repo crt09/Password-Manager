@@ -13,7 +13,7 @@ namespace PasswordManager.Tests.CoreTests.SerializationTests {
 			public string TestString { get; set; }
 		}
 
-		string path = "storage_test.dat";
+		string path = "testdata/storage_test.dat";
 
 		[TestMethod]
 		public void Deserialize_FromCurrentDirectoryAsObject_Pass() {

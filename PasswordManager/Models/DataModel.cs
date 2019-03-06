@@ -10,7 +10,7 @@ namespace PasswordManager.Models {
 
 		private readonly DataManager dataManager;
 		public DataModel() {
-			dataManager = new DataManager("database.dat");	
+			dataManager = new DataManager("data/database.dat");	
 		}
 
 		/// <summary>

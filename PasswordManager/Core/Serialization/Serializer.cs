@@ -11,6 +11,9 @@ namespace PasswordManager.Windows.Core.Serialization {
 		}
 
 		public void Serialize(TObj obj, string to) {
+			var path = Path.GetDirectoryName(to);
+			if (path != string.Empty && !Directory.Exists(path))
+				Directory.CreateDirectory(path);
 			if(File.Exists(to))
 				File.Delete(to);
 			using (var stream = new FileStream(to, FileMode.OpenOrCreate)) {

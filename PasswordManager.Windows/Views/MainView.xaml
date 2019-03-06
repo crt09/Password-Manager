@@ -25,13 +25,13 @@
 					</Grid.RowDefinitions>
 					<Label Content="Change application password" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
 					<Label Content="Old password:" HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top"/>
-					<PasswordBox x:Name="OldAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,50,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<PasswordBox x:Name="OldAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,50,15,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
 					<Label Content="New password:" HorizontalAlignment="Left" Margin="15,80,0,0" VerticalAlignment="Top"/>
-					<PasswordBox x:Name="NewAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,80,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<PasswordBox x:Name="NewAppPassword" HorizontalAlignment="Stretch" Height="26" Margin="123,80,15,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
 					<Label Content="Repeat password:" HorizontalAlignment="Left" Margin="15,110,0,0" VerticalAlignment="Top"/>
-					<PasswordBox x:Name="NewAppPasswordRepeat" HorizontalAlignment="Stretch" Height="26" Margin="123,111,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-					<Button x:Name="ChangePasswordButton" Content="Change" HorizontalAlignment="Right" Margin="0,142,10,0" VerticalAlignment="Top" Width="75" Height="30" Click="ChangePasswordButton_Click"/>
-					<Separator HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,182,0,0"/>
+					<PasswordBox x:Name="NewAppPasswordRepeat" HorizontalAlignment="Stretch" Height="26" Margin="123,111,15,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+					<Button x:Name="ChangePasswordButton" Content="Change" HorizontalAlignment="Right" Margin="0,142,15,0" VerticalAlignment="Top" Width="75" Height="30" Click="ChangePasswordButton_Click"/>
+					<Separator HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,187,0,0"/>
 				</Grid>
 			</TabItem>
 		</TabControl>

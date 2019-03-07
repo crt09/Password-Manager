@@ -12,7 +12,7 @@
 		<PasswordBox x:Name="RepeatPassword" HorizontalAlignment="Center" Height="24" Margin="0,50,0,0" VerticalAlignment="Center" Width="226" Visibility="Collapsed" VerticalContentAlignment="Center"/>
 		<Label Content="Password:" HorizontalAlignment="Center" Margin="0,0,300,50" VerticalAlignment="Center"/>
 		<Label Content="Repeat password:" HorizontalAlignment="Right" Margin="0,50,420,0" VerticalAlignment="Center" Visibility="{Binding Visibility, ElementName=RepeatPassword}"/>
-		<Button x:Name="ActionButton" Content="do-action" HorizontalAlignment="Center" Margin="0,0,0,150" VerticalAlignment="Bottom" Width="76" Height="30" Click="ActionButton_OnClick"/>
+		<Button x:Name="ActionButton" Content="do-action" HorizontalAlignment="Center" Margin="0,0,0,150" VerticalAlignment="Bottom" Width="76" Height="30" Click="ActionButton_OnClick" IsDefault="True"/>
 
 	</Grid>
 </UserControl>

@@ -22,6 +22,7 @@ namespace PasswordManager.Windows {
 			}
 
 			MainGrid.Children.Add(loginView);
+			loginView.Password.Focus();
 		}
 
 		private void Login(string password) {					

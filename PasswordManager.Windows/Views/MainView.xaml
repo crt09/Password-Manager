@@ -17,6 +17,9 @@
 					<Separator VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0"/>
 				</Grid>
 			</TabItem>
+			<TabItem Header="Password generator">
+				<Grid x:Name="PasswordGenGrid" Background="White"/>
+			</TabItem>
 			<TabItem Header="Settings">
 				<Grid Background="White" Margin="-2,-1,-2,0">
 					<Grid.RowDefinitions>

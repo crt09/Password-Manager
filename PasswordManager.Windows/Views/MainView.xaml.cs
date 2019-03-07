@@ -14,6 +14,9 @@ namespace PasswordManager.Windows.Views {
 			dataModel = new DataModel();
 			configModel = new ConfigurationModel();
 			this.UpdateDataPanel();
+
+			var genView = new PasswordGenView();
+			PasswordGenGrid.Children.Add(genView);
 		}
 
 		private void UpdateDataPanel() {

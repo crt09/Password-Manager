@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManager.Windows.Core.Serialization {
+namespace PasswordManager.Windows.Core.Helpers {
 	public static class Encryption {
 
 		public static string Encrypt(string text, string key) {

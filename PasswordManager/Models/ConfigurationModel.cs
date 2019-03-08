@@ -1,5 +1,5 @@
-﻿using PasswordManager.Windows.Core.Configuration;
-using PasswordManager.Windows.Core.Serialization;
+﻿using PasswordManager.Windows.Core.Helpers;
+using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage;
 
 namespace PasswordManager.Models {

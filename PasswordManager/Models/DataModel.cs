@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
-using PasswordManager.Windows.Core.Data;
-using PasswordManager.Windows.Core.Serialization;
+using PasswordManager.Windows.Core.Helpers;
+using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Models {
@@ -18,8 +17,7 @@ namespace PasswordManager.Models {
 				}
 				return new ReadOnlyCollection<LoginDatabaseRecord>(records);
 			}
-		}
-			
+		}			
 
 		private readonly DataManager dataManager;
 		public DataModel() {

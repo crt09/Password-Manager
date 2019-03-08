@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PasswordManager.Windows.Core.Serialization;
+using PasswordManager.Windows.Core.Helpers;
 
 namespace PasswordManager.Tests.CoreTests.SerializationTests {
 	[TestClass]

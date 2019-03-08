@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace PasswordManager.Windows.Core.Serialization {
+namespace PasswordManager.Windows.Core.Helpers {
 	public class Serializer<TObj> where TObj : new() {
 
 		private BinaryFormatter formatter;

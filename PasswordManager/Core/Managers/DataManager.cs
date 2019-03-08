@@ -1,7 +1,7 @@
-﻿using PasswordManager.Windows.Core.Serialization;
+﻿using PasswordManager.Windows.Core.Helpers;
 using PasswordManager.Windows.Core.Storage.Database;
 
-namespace PasswordManager.Windows.Core.Data {
+namespace PasswordManager.Windows.Core.Managers {
 	public class DataManager : IManager<LoginDatabase> {
 
 		private Serializer<LoginDatabase> formatter;

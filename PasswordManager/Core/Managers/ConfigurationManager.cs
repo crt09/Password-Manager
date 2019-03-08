@@ -1,7 +1,7 @@
-﻿using PasswordManager.Windows.Core.Serialization;
+﻿using PasswordManager.Windows.Core.Helpers;
 using PasswordManager.Windows.Core.Storage;
 
-namespace PasswordManager.Windows.Core.Configuration {
+namespace PasswordManager.Windows.Core.Managers {
 	public class ConfigurationManager : IManager<ConfigStorage> {
 
 		private Serializer<ConfigStorage> formatter;

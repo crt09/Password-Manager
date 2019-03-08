@@ -1,5 +1,5 @@
 ﻿using System;
-using PasswordManager.Windows.Core.Serialization;
+using PasswordManager.Windows.Core.Helpers;
 
 namespace PasswordManager.Models {
 	public class PasswordGenModel {

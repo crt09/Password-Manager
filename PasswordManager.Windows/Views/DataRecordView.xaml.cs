@@ -13,8 +13,12 @@ namespace PasswordManager.Windows.Views {
 
 		public uint Key { get; set; }
 
-		public DataRecordView(uint index) {
-			InitializeComponent();
+		public DataRecordView() {
+			InitializeComponent();			
+		}
+
+		public void UpdateIndexProperties(uint index) {
+			Background = Brushes.White;
 			if (index % 2 > 0) Background = Brushes.WhiteSmoke;
 			if (index == 0) Separator.Visibility = Visibility.Collapsed;
 		}

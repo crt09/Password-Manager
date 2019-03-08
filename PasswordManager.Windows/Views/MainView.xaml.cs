@@ -21,26 +21,57 @@ namespace PasswordManager.Windows.Views {
 
 		private void UpdateDataPanel() {
 			DataPanel.Children.Clear();
-			for (int i = 0; i < dataModel.Records.Count; i++) {
-				var dataView = new DataRecordView((uint) i);
-				dataView.Key = dataModel.Records[i].Key;
-				dataView.ServiceName.Content = dataModel.Records[i].Name;
-				dataView.ServiceLogin.Text = dataModel.Records[i].Login;
-				dataView.ServicePassword.Password = dataModel.Records[i].Password;
-				dataView.Delete += DataViewOnDelete;
-				dataView.Edit += DataViewOnEdit;
+			var records = dataModel.Records;
+			for (int i = 0; i < records.Count; i++) {
+				var dataView = CreateDataView(records[i]);
+				dataView.UpdateIndexProperties((uint)i);
 				DataPanel.Children.Add(dataView);
 			}
 		}
 
+		private void UpdateDataPanelProperties() {
+			for (int i = 0; i < DataPanel.Children.Count; i++) {
+				if (DataPanel.Children[i] is DataRecordView dataView) {
+					dataView.UpdateIndexProperties((uint)i);
+					dataView.Key = (uint)i;
+				}
+			}
+		}
+
+		private DataRecordView CreateDataView(LoginDatabaseRecord record) {
+			var dataView = new DataRecordView();
+			dataView.Key = record.Key;
+			dataView.ServiceName.Content = record.Name;
+			dataView.ServiceLogin.Text = record.Login;
+			dataView.ServicePassword.Password = record.Password;
+			dataView.Delete += DataViewOnDelete;
+			dataView.Edit += DataViewOnEdit;
+			return dataView;
+		}
+
 		private void DataViewOnEdit(uint key, LoginDatabaseRecord record) {
 			dataModel.EditValue(key, record);
-			this.UpdateDataPanel();
+			foreach (var element in DataPanel.Children) {
+				if (element is DataRecordView dataView && dataView.Key == key) {
+					dataView.ServiceName.Content = record.Name;
+					dataView.ServiceLogin.Text = record.Login;
+					dataView.ServicePassword.Password = record.Password;
+					return;
+				}
+			}			
 		}
 
 		private void DataViewOnDelete(uint key) {
 			dataModel.RemoveValue(key);
-			this.UpdateDataPanel();
+			foreach (var element in DataPanel.Children) {
+				if (element is DataRecordView dataView) {
+					if (dataView.Key == key) {
+						DataPanel.Children.Remove(dataView);
+						break;
+					}
+				}
+			}
+			this.UpdateDataPanelProperties();
 		}
 
 		private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -55,7 +86,10 @@ namespace PasswordManager.Windows.Views {
 			record.Login = dataWindow.ServiceLogin;
 			record.Password = dataWindow.ServicePassword;
 			dataModel.AddValue(record);
-			this.UpdateDataPanel();
+
+			var view = CreateDataView(record);
+			DataPanel.Children.Add(view);
+			this.UpdateDataPanelProperties();
 		}
 
 		private void ChangePasswordButton_Click(object sender, RoutedEventArgs e) {

@@ -1,4 +1,5 @@
-﻿using PasswordManager.Windows.Core.Configuration;
+﻿using PasswordManager.Windows.Core.Helpers;
+using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage;
 
 namespace PasswordManager.Models {
@@ -6,10 +7,12 @@ namespace PasswordManager.Models {
 
 		public string AppPassword => configManager.Load().AppPassword;
 		public bool Registered => !configManager.IsConfigMissing();
+		private readonly string encryptionKey;
 
 		private readonly ConfigurationManager configManager;	
 		public ConfigurationModel() {
 			configManager = new ConfigurationManager("data/config.dat");
+			this.encryptionKey = "jYshfjkc";
 		}
 
 		/// <summary>
@@ -18,7 +21,7 @@ namespace PasswordManager.Models {
 		/// <param name="password">Password to save</param>
 		public void Register(string password) {
 			var storage = new ConfigStorage();
-			storage.AppPassword = password;
+			storage.AppPassword = Encryption.Encrypt(password, this.encryptionKey);
 			configManager.Save(storage);
 		}
 
@@ -30,7 +33,8 @@ namespace PasswordManager.Models {
 		/// <returns>Validation result</returns>
 		public bool Login(string password) {
 			var storage = configManager.Load();
-			return storage.AppPassword == password;
+			var decryptedPassword = Encryption.Decrypt(storage.AppPassword, this.encryptionKey);
+			return decryptedPassword == password;
 		}
 	}
 }

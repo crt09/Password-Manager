@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PasswordManager.Windows.Core.Configuration;
+using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage;
 
 namespace PasswordManager.Tests.CoreTests.ConfigurationTests {

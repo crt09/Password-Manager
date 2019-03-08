@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PasswordManager.Windows.Core.Data;
+using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Tests.Core.DataTests {

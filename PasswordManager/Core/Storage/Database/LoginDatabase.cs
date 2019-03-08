@@ -13,12 +13,7 @@ namespace PasswordManager.Windows.Core.Storage.Database {
 		public LoginDatabase Clone() {
 			var records = new List<LoginDatabaseRecord>();
 			foreach (var record in this.Records) {
-				var dbRecord = new LoginDatabaseRecord();
-				dbRecord.Key = record.Key;
-				dbRecord.Name = record.Name;
-				dbRecord.Login = record.Login;
-				dbRecord.Password = record.Password;
-				records.Add(dbRecord);
+				records.Add(record.Clone());
 			}
 			var database = new LoginDatabase();
 			database.Records = records;

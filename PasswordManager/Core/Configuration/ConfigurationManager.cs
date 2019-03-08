@@ -5,13 +5,11 @@ namespace PasswordManager.Windows.Core.Configuration {
 	public class ConfigurationManager : IManager<ConfigStorage> {
 
 		private Serializer<ConfigStorage> formatter;
-		private readonly string path;
-		private readonly string encryptionKey;
+		private readonly string path;		
 
 		public ConfigurationManager(string path) {
 			formatter = new Serializer<ConfigStorage>();
-			this.path = path;
-			this.encryptionKey = "jYshfjkc";
+			this.path = path;			
 		}
 
 		public bool IsConfigMissing() {
@@ -19,14 +17,12 @@ namespace PasswordManager.Windows.Core.Configuration {
 		}
 
 		public void Save(ConfigStorage storage) {
-			var bufferStorage = storage.Clone();
-			bufferStorage.AppPassword = Encryption.Encrypt(bufferStorage.AppPassword, encryptionKey);
+			var bufferStorage = storage.Clone();			
 			formatter.Serialize(bufferStorage, path);
 		}
 
 		public ConfigStorage Load() {
-			var storage = formatter.Deserialize(path);
-			storage.AppPassword = Encryption.Decrypt(storage.AppPassword, encryptionKey);
+			var storage = formatter.Deserialize(path);			
 			return storage;
 		}
 	}

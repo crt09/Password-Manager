@@ -1,16 +1,30 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using PasswordManager.Windows.Core.Data;
+using PasswordManager.Windows.Core.Serialization;
 using PasswordManager.Windows.Core.Storage.Database;
 
 namespace PasswordManager.Models {
 	public class DataModel {
 
-		public ReadOnlyCollection<LoginDatabaseRecord> Records => 
-			new ReadOnlyCollection<LoginDatabaseRecord>(dataManager.Load().Records);
+		private readonly string encryptionKey;
+
+		public ReadOnlyCollection<LoginDatabaseRecord> Records {
+			get {
+				var records = dataManager.Load().Records;
+				foreach (var record in records) {
+					record.Login = Encryption.Decrypt(record.Login, this.encryptionKey);
+					record.Password = Encryption.Decrypt(record.Password, this.encryptionKey);
+				}
+				return new ReadOnlyCollection<LoginDatabaseRecord>(records);
+			}
+		}
+			
 
 		private readonly DataManager dataManager;
 		public DataModel() {
 			dataManager = new DataManager("data/database.dat");	
+			this.encryptionKey = "slpgnTnJ";
 		}
 
 		/// <summary>
@@ -18,9 +32,12 @@ namespace PasswordManager.Models {
 		/// </summary>
 		/// <param name="record">Record to add</param>
 		public void AddValue(LoginDatabaseRecord record) {
+			var recordBuffer = record.Clone();
+			recordBuffer.Login = Encryption.Encrypt(recordBuffer.Login, this.encryptionKey);
+			recordBuffer.Password = Encryption.Encrypt(recordBuffer.Password, this.encryptionKey);
 			LoginDatabase database = dataManager.Load();
-			database.Records.Add(record);
-			dataManager.Save(database);
+			database.Records.Add(recordBuffer);
+			dataManager.Save(database);			
 		}
 
 		/// <summary>
@@ -30,7 +47,7 @@ namespace PasswordManager.Models {
 		public void RemoveValue(uint key) {
 			LoginDatabase database = dataManager.Load();
 			database.Records.RemoveAll(rec => rec.Key == key);
-			dataManager.Save(database);		
+			dataManager.Save(database);
 		}
 
 		/// <summary>
@@ -39,10 +56,13 @@ namespace PasswordManager.Models {
 		/// <param name="key">Key to find replacing record</param>
 		/// <param name="record">Record to replace key record</param>
 		public void EditValue(uint key, LoginDatabaseRecord record) {
+			var recordBuffer = record.Clone();
+			recordBuffer.Login = Encryption.Encrypt(recordBuffer.Login, this.encryptionKey);
+			recordBuffer.Password = Encryption.Encrypt(recordBuffer.Password, this.encryptionKey);
 			LoginDatabase database = dataManager.Load();
 			for (int i = 0; i < database.Records.Count; i++) {
 				if (database.Records[i].Key == key) {
-					database.Records[i] = record;
+					database.Records[i] = recordBuffer;
 					break;
 				}
 			}

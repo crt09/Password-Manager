@@ -1,17 +1,17 @@
 ﻿using System;
-using PasswordManager.Windows.Core.Helpers;
 
 namespace PasswordManager.Models {
 	public class PasswordGenModel {
-		public string Generate() {
-			long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-			string text = timestamp.ToString();
-			string key = text.Substring(text.Length - 8, 8);
-			string encrypted = Encryption.Encrypt(text, key);
-
-			int length = new Random().Next(12, encrypted.Length - 2);
-			string password = encrypted.Substring(0, length);
-			return password;
+		public string Generate(uint minLength, uint maxLength, string pattern) {
+			var symbols = pattern.ToCharArray();
+			var random = new Random();
+			string result = string.Empty;
+			int randomLength = random.Next((int)minLength, (int)maxLength + 1);
+			for (uint i = 0; i < randomLength; i++) {
+				int randomIndex = random.Next(0, symbols.Length);
+				result += symbols[randomIndex];
+			}
+			return result;
 		}
 	}
 }

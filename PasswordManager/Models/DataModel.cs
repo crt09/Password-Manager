@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using PasswordManager.Windows.Core.Helpers;
+﻿using PasswordManager.Windows.Core.Helpers;
 using PasswordManager.Windows.Core.Managers;
 using PasswordManager.Windows.Core.Storage.Database;
+using System.Collections.ObjectModel;
 
 namespace PasswordManager.Models {
 	public class DataModel {
+
+		public static string DatabasePath => "data/database.dat";
 
 		private readonly string encryptionKey;
 
@@ -17,11 +19,11 @@ namespace PasswordManager.Models {
 				}
 				return new ReadOnlyCollection<LoginDatabaseRecord>(records);
 			}
-		}			
+		}
 
 		private readonly DataManager dataManager;
 		public DataModel() {
-			dataManager = new DataManager("data/database.dat");	
+			dataManager = new DataManager(DatabasePath);
 			this.encryptionKey = "slpgnTnJ";
 		}
 
@@ -35,7 +37,7 @@ namespace PasswordManager.Models {
 			recordBuffer.Password = Encryption.Encrypt(recordBuffer.Password, this.encryptionKey);
 			LoginDatabase database = dataManager.Load();
 			database.Records.Add(recordBuffer);
-			dataManager.Save(database);			
+			dataManager.Save(database);
 		}
 
 		/// <summary>
@@ -65,6 +67,6 @@ namespace PasswordManager.Models {
 				}
 			}
 			dataManager.Save(database);
-		}		
+		}
 	}
 }

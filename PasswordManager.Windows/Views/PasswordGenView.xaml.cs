@@ -13,6 +13,7 @@ namespace PasswordManager.Windows.Views {
 			genModel = new PasswordGenModel();
 			configModel = new ConfigurationModel();
 			this.LoadConfig();
+			this.Generate();
 		}
 
 		private void PasswordBox_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
@@ -27,7 +28,16 @@ namespace PasswordManager.Windows.Views {
 			PasswordBox.Text = genModel.Generate((uint)MinLengthSlider.Value, (uint)MaxLengthSlider.Value, PatternTextBox.Text);
 		}
 
-		private void LengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+		private void MaxLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+			if (MinLengthSlider == null || MaxLengthSlider == null)
+				return;
+			if (MaxLengthSlider.Value < MinLengthSlider.Value) {
+				MinLengthSlider.Value = MaxLengthSlider.Value;
+			}
+			this.SaveConfig();
+		}
+
+		private void MinLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
 			if (MinLengthSlider == null || MaxLengthSlider == null)
 				return;
 			if (MaxLengthSlider.Value < MinLengthSlider.Value) {
@@ -50,13 +60,12 @@ namespace PasswordManager.Windows.Views {
 			ConfigStorage config = configModel.LoadGenProperties();
 			MinLengthSlider.Value = config.GenMinLength;
 			MaxLengthSlider.Value = config.GenMaxLength;
-			PatternTextBox.Text = config.GenPattern;
-			this.Generate();
+			PatternTextBox.Text = config.GenPattern;			
 		}
 
 		private void ResetButton_Click(object sender, RoutedEventArgs e) {
 			configModel.ResetGenProperties();
 			this.LoadConfig();
-		}
+		}			
 	}
 }

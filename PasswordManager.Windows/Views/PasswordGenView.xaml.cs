@@ -25,7 +25,9 @@ namespace PasswordManager.Windows.Views {
 		}
 
 		private void Generate() {
-			PasswordBox.Text = genModel.Generate((uint)MinLengthSlider.Value, (uint)MaxLengthSlider.Value, PatternTextBox.Text);
+			if (PatternTextBox.Text != string.Empty) {
+				PasswordBox.Text = genModel.Generate((uint)MinLengthSlider.Value, (uint)MaxLengthSlider.Value, PatternTextBox.Text);
+			}
 		}
 
 		private void MaxLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -60,12 +62,12 @@ namespace PasswordManager.Windows.Views {
 			ConfigStorage config = configModel.LoadGenProperties();
 			MinLengthSlider.Value = config.GenMinLength;
 			MaxLengthSlider.Value = config.GenMaxLength;
-			PatternTextBox.Text = config.GenPattern;			
+			PatternTextBox.Text = config.GenPattern;
 		}
 
 		private void ResetButton_Click(object sender, RoutedEventArgs e) {
 			configModel.ResetGenProperties();
 			this.LoadConfig();
-		}			
+		}
 	}
 }

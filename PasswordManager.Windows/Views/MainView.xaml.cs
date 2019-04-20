@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using PasswordManager.Models;
 using PasswordManager.Windows.Core.Storage.Database;
 
@@ -93,15 +94,41 @@ namespace PasswordManager.Windows.Views {
 		}
 
 		private void ChangePasswordButton_Click(object sender, RoutedEventArgs e) {
-			if (configModel.Login(OldAppPassword.Password)
-				&& NewAppPassword.Password == NewAppPasswordRepeat.Password
-				&& NewAppPassword.Password != string.Empty) {
-
-				configModel.Register(NewAppPassword.Password);
-				OldAppPassword.Password = string.Empty;
-				NewAppPassword.Password = string.Empty;
-				NewAppPasswordRepeat.Password = string.Empty;
+			if (!configModel.Login(OldAppPassword.Password)) {
+				ShowInfo("Incorrect password", Brushes.Red);
+				OldAppPassword.BorderBrush = Brushes.Red;
+				return;
 			}
+			if(NewAppPassword.Password != NewAppPasswordRepeat.Password) {
+				ShowInfo("Passwords aren't the same", Brushes.Red);
+				NewAppPassword.BorderBrush = Brushes.Red;
+				NewAppPasswordRepeat.BorderBrush = Brushes.Red;
+				return;
+			}
+			if(NewAppPassword.Password == string.Empty) {
+				ShowInfo("Please, enter all required data", Brushes.Red);
+				NewAppPassword.BorderBrush = Brushes.Red;
+				NewAppPasswordRepeat.BorderBrush = Brushes.Red;
+				return;
+			}
+
+			configModel.Register(NewAppPassword.Password);
+			OldAppPassword.Password = string.Empty;
+			NewAppPassword.Password = string.Empty;
+			NewAppPasswordRepeat.Password = string.Empty;
+
+			InfoLabel.Foreground = Brushes.Green;
+			InfoLabel.Content = "Password successfully changed";
+		}
+
+		private void ShowInfo(string text, Brush color) {
+			InfoLabel.Content = text;
+			InfoLabel.Foreground = color;
+		}
+
+		private void AppPassword_PasswordChanged(object sender, RoutedEventArgs e) {
+			(sender as Control).BorderBrush = Brushes.Gray;
+			InfoLabel.Content = string.Empty;
 		}
 	}
 }

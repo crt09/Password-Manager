@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="Title" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
 	<Grid>
-		<TextBox x:Name="NameBox" HorizontalAlignment="Stretch" Height="23" Margin="10,36,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-		<TextBox x:Name="LoginBox" HorizontalAlignment="Stretch" Height="23" Margin="10,90,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
-		<PasswordBox x:Name="PasswordBox" HorizontalAlignment="Stretch" Height="23" Margin="10,144,10,0" Password="" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+		<TextBox x:Name="NameBox" HorizontalAlignment="Stretch" Height="23" Margin="10,36,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+		<TextBox x:Name="LoginBox" HorizontalAlignment="Stretch" Height="23" Margin="10,90,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+		<PasswordBox x:Name="PasswordBox" HorizontalAlignment="Stretch" Height="23" Margin="10,144,10,0" Password="" VerticalAlignment="Top" VerticalContentAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"/>
 		<Button x:Name="ActionButton" Content="Act" HorizontalAlignment="Stretch" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="30" Click="ActionButton_Click"/>
 		<Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 		<Label Content="Login:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
 		<Label Content="Password:" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="WarningLabel" Content="" HorizontalAlignment="Left" Margin="10,0,0,45" VerticalAlignment="Bottom" Foreground="Red"/>
 	</Grid>
 </Window>

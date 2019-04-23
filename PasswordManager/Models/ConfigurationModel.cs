@@ -5,13 +5,14 @@ using PasswordManager.Windows.Core.Storage;
 namespace PasswordManager.Models {
 	public class ConfigurationModel {
 
+		public static string ConfigPath => "data/config.dat";
 		public string AppPassword => configManager.Load().AppPassword;
 		public bool Registered => !configManager.IsConfigMissing();
 		private readonly string encryptionKey;
 
 		private readonly ConfigurationManager configManager;	
 		public ConfigurationModel() {
-			configManager = new ConfigurationManager("data/config.dat");
+			configManager = new ConfigurationManager(ConfigPath);
 			this.encryptionKey = "jYshfjkc";
 		}
 
@@ -20,7 +21,7 @@ namespace PasswordManager.Models {
 		/// </summary>
 		/// <param name="password">Password to save</param>
 		public void Register(string password) {
-			var storage = new ConfigStorage();
+			ConfigStorage storage = configManager.Load();
 			storage.AppPassword = Encryption.Encrypt(password, this.encryptionKey);
 			configManager.Save(storage);
 		}
@@ -32,9 +33,32 @@ namespace PasswordManager.Models {
 		/// <param name="password">Password to check</param>
 		/// <returns>Validation result</returns>
 		public bool Login(string password) {
-			var storage = configManager.Load();
-			var decryptedPassword = Encryption.Decrypt(storage.AppPassword, this.encryptionKey);
+			ConfigStorage storage = configManager.Load();
+			string decryptedPassword = Encryption.Decrypt(storage.AppPassword, this.encryptionKey);
 			return decryptedPassword == password;
+		}
+
+		public void SaveGenProperties(uint minLength, uint maxLength, string pattern) {
+			ConfigStorage storage = configManager.Load();
+			storage.GenMinLength = minLength;
+			storage.GenMaxLength = maxLength;
+			storage.GenPattern = pattern;
+			configManager.Save(storage);
+		}
+
+		public ConfigStorage LoadGenProperties() {
+			ConfigStorage storage = configManager.Load();
+			storage.AppPassword = null;
+			return storage;
+		}
+
+		public void ResetGenProperties() {
+			var defaultStorage = new ConfigStorage();
+			ConfigStorage storage = configManager.Load();
+			storage.GenMinLength = defaultStorage.GenMinLength;
+			storage.GenMaxLength = defaultStorage.GenMaxLength;
+			storage.GenPattern = defaultStorage.GenPattern;
+			configManager.Save(storage);
 		}
 	}
 }

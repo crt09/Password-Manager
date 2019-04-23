@@ -1,10 +1,10 @@
-﻿using System.Windows;
-using PasswordManager.Models;
+﻿using PasswordManager.Models;
 using PasswordManager.Windows.Views;
+using System.Windows;
 
 namespace PasswordManager.Windows {
 	public partial class MainWindow : Window {
-		private ConfigurationModel configModel;
+		private readonly ConfigurationModel configModel;
 		public MainWindow() {
 			InitializeComponent();
 			configModel = new ConfigurationModel();
@@ -13,7 +13,7 @@ namespace PasswordManager.Windows {
 			if (configModel.Registered) {
 				loginView.InfoLabel.Content = "Enter password";
 				loginView.ActionButton.Content = "Login";
-				loginView.ActionButtonClick += Login;				
+				loginView.ActionButtonClick += Login;
 			} else {
 				loginView.InfoLabel.Content = "Register";
 				loginView.ActionButton.Content = "Save";
@@ -25,20 +25,23 @@ namespace PasswordManager.Windows {
 			loginView.Password.Focus();
 		}
 
-		private void Login(string password) {					
-			if (configModel.Login(password)) {
+		private bool Login(string password) {
+			bool loginSuccess = configModel.Login(password);
+			if (loginSuccess) {
 				this.RunMainView();
 			}
+			return loginSuccess;
 		}
 
-		private void Register(string password) {			
+		private bool Register(string password) {
 			configModel.Register(password);
 			this.RunMainView();
+			return true;
 		}
 
 		private void RunMainView() {
-			var view = new MainView();
 			MainGrid.Children.Clear();
+			var view = new MainView();
 			MainGrid.Children.Add(view);
 		}
 	}

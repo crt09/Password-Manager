@@ -4,13 +4,13 @@ using PasswordManager.Windows.Core.Storage.Database;
 namespace PasswordManager.Windows.Core.Managers {
 	public class DataManager : IManager<LoginDatabase> {
 
-		private Serializer<LoginDatabase> formatter;
+		private readonly Serializer<LoginDatabase> formatter;
 		private readonly string path;
 
 		public DataManager(string path) {
 			formatter = new Serializer<LoginDatabase>();
 			this.path = path;
-		}		
+		}
 
 		public void Save(LoginDatabase database) {
 			var bufferDatabase = database.Clone();

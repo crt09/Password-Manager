@@ -40,9 +40,11 @@ namespace PasswordManager.Windows {
 		}
 
 		private void RunMainView() {
-			MainGrid.Children.Clear();
-			var view = new MainView();
-			MainGrid.Children.Add(view);
+			Dispatcher.Invoke(() => {
+				MainGrid.Children.Clear();
+				var view = new MainView();
+				MainGrid.Children.Add(view);
+			});		
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -40,11 +41,13 @@ namespace PasswordManager.Windows.Views {
 			Password.BorderBrush = Brushes.Red;
 		}
 
-		private void PasswordChanged(object sender, RoutedEventArgs e) {
+		private async void PasswordChanged(object sender, RoutedEventArgs e) {
 			(sender as Control).BorderBrush = Brushes.Gray;
 			WarningLabel.Content = string.Empty;
 			if(RepeatPassword.Visibility != Visibility.Visible) {
-				TryActionInvoke();
+				await Task.Run(() => {
+					TryActionInvoke();
+				});
 			}
 		}
 

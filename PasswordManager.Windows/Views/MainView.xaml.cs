@@ -14,10 +14,11 @@ namespace PasswordManager.Windows.Views {
 			InitializeComponent();
 			dataModel = new DataModel();
 			configModel = new ConfigurationModel();
-			this.UpdateDataPanel();
 
 			var genView = new PasswordGenView();
 			PasswordGenGrid.Children.Add(genView);
+
+			this.UpdateDataPanel();
 		}
 
 		private void UpdateDataPanel() {
